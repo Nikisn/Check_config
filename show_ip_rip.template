@@ -1,0 +1,9 @@
+# Просмотр протоколов, которые перешли в RIP
+Value PROTOCOLS (O\(r\)|B\(r\))
+Value NETWORK ([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})
+Value MASK (\/\d{1,2})
+Value NEXT_HOP ([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})
+Value FROM (\S+)
+
+Start
+  ^${PROTOCOLS}\s${NETWORK}${MASK}\s+${NEXT_HOP}\s+\d+\s${FROM} -> Record
