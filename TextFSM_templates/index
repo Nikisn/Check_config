@@ -8,3 +8,4 @@ show_ip_route_ALL.template, .*, Cisco, sh[[ow]] ip ro[[ute]] bgp
 show_ip_route_connected.template, .*, Cisco, sh[[ow]] ip ro[[ute]] connected
 show_isis_topology.template, .*, Cisco, sh[[ow]] isis topology
 show_isis_neighbor.template, .*, Cisco, sh[[ow]] isis ne[[ighbor]]
+ping.template, .*, Cisco, ^ping\s([1-9].{6}).+
