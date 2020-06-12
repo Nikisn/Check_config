@@ -1,0 +1,10 @@
+Template, Hostname, Vendor, Command
+show_ip_ospf_neighbor.template, .*, Cisco, sh[[ow]] ip ospf ne[[ighbor]]
+show_ip_rip_status.template, .*, Cisco, sh[[ow]] ip rip status
+show_ip_route_ALL.template, .*, Cisco, sh[[ow]] ip ro[[ute]] 
+show_ip_route_ALL.template, .*, Cisco, sh[[ow]] ip ro[[ute]] ospf
+show_ip_route_ALL.template, .*, Cisco, sh[[ow]] ip ro[[ute]] rip
+show_ip_route_ALL.template, .*, Cisco, sh[[ow]] ip ro[[ute]] bgp
+show_ip_route_connected.template, .*, Cisco, sh[[ow]] ip ro[[ute]] connected
+show_isis_topology.template, .*, Cisco, sh[[ow]] isis topology
+show_isis_neighbor.template, .*, Cisco, sh[[ow]] isis ne[[ighbor]]

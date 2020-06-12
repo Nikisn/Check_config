@@ -1,0 +1,10 @@
+#Запрос топологии IS-IS, для проверки отработки редистрибуции
+Value NETWORK ([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})
+Value MASK (\/\d{1,2})
+Value TYPE (\w+)
+Value PATH (\w+)
+Value INTERFACE (enp\d+s\d+)
+
+Start
+  ^${NETWORK}${MASK}\s+${TYPE}\s${PATH}\s+\d+\s+\S+\s+${INTERFACE} -> Record
+

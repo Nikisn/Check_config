@@ -1,0 +1,7 @@
+#Запрос cоседства IS-IS, отображает шлюз и состояние связи
+Value INTERFACE (enp\d+s\d+)
+Value STATE ([U]\w+ | [D]\w+)
+
+Start
+  ^.+${INTERFACE}.+${STATE} -> Record
+
