@@ -1,0 +1,7 @@
+#Выполнение команды ping
+Value RECIEVE (\d+)
+Value LOSS (\d+)
+
+
+Start
+  ^4\s\w+\s\w+,\s+${RECIEVE}\s\w+,\s+${LOSS} -> Record
