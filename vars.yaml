@@ -1,0 +1,109 @@
+- id: 1.1.1.1
+  name: R1
+  redistribute_I: isis
+  redistribute_O: ipv4 ospf level-2
+  enp0s8:
+    ip: 22.1.2.1
+  enp0s9:
+    ip: 22.1.3.1
+    pam1: ip ospf cost 1
+  enp0s10:
+    ip: 22.1.4.1
+    pam1: ip router isis 1
+    pam2: isis circuit-type level-2-only
+    pam3: isis network point-to-point  
+  ospf:
+    - network: 1.1.1.1/32
+      area: 0
+    - network: 22.1.2.0/24
+      area: 0
+    - network: 22.1.3.0/24
+      area: 0
+  isis:
+    id: 1
+    net: 49.0001.1111.1111.1111.00
+    redistribute: ipv4 ospf level-2
+
+
+- id: 2.2.2.2
+  name: R2
+  route: 5.5.5.5/32 22.2.5.2
+  redistribute_S: static
+  enp0s8:
+    ip: 22.1.2.1
+  enp0s9:
+    ip: 22.2.3.1
+    pam1: ip ospf cost 1
+  enp0s10:
+    ip: 2.2.5.1
+  ospf:
+    - network: 2.2.2.2/32
+      area: 0
+    - network: 22.1.2.0/24
+      area: 0
+    - network: 22.2.3.0/24
+      area: 0
+
+- id: 3.3.3.3
+  name: R3
+  redistribute_R: rip
+  redistribute_O: ospf
+  enp0s8:
+    ip: 22.1.3.2
+    pam1: ip ospf cost 1
+  enp0s9:
+    ip: 22.2.3.2
+    pam1: ip ospf cost 1
+  enp0s10:
+    ip: 2.2.5.1
+  ospf:
+    - network: 3.3.3.3/32
+      area: 0
+    - network: 22.1.3.0/24
+      area: 0
+    - network: 22.2.3.0/24
+      area: 0
+  rip:
+    - network: 3.3.3.3/32
+    - network: 22.3.6.0/24
+
+
+
+- id: 4.4.4.4
+  name: R4
+  enp0s8:
+    ip: 22.1.4.2
+    pam1: ip router isis 2
+    pam2: isis circuit-type level-2-only
+    pam3: isis network point-to-point
+  isis:
+    id: 2
+    net: 49.0001.4444.4444.4444.00
+
+
+- id: 5.5.5.5
+  name: R5
+  route: 5.5.5.5/32 22.2.5.2
+  enp0s8:
+    ip: 22.1.5.2
+
+
+- id: 6.6.6.6
+  name: R6
+  enp0s8:
+    ip: 22.3.6.2
+  enp0s9:
+    ip: 22.6.7.1
+  rip:
+    - network: 6.6.6.6/32
+    - network: 22.3.6.0/24
+    - network: 22.6.7.0/24
+
+- id: 7.7.7.7
+  name: R7
+  route: 8.8.8.8/32 192.168.1.1
+  enp0s8:
+    ip: 22.6.7.2
+  rip:
+    - network: 7.7.7.7/32
+    - network: 22.6.7.0/24
