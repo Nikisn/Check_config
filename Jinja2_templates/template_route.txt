@@ -1,0 +1,96 @@
+hostname {{ name }}
+ip forwarding
+!
+{% if route %}
+ip route {{ route }}
+!
+{% endif %}
+interface enp0s8
+ ip address {{ enp0s8.ip }}/24
+ {% if enp0s8.pam1 %}
+ {{ enp0s8.pam1 }}
+ {% endif %}
+ {% if enp0s8.pam2 %}
+ {{ enp0s8.pam2 }}
+ {% endif %}
+ {% if enp0s8.pam3 %}
+ {{ enp0s8.pam3 }}
+ {% endif %}
+ {% if enp0s8.pam4 %}
+ {{ enp0s8.pam4 }}
+ {% endif %} 
+{% if enp0s9 %}
+interface enp0s9
+ ip address {{ enp0s9.ip }}/24
+ {% if enp0s9.pam1 %}
+ {{ enp0s9.pam1 }}
+ {% endif %}
+ {% if enp0s9.pam2 %}
+ {{ enp0s9.pam2 }}
+ {% endif %}
+ {% if enp0s9.pam3 %}
+ {{ enp0s9.pam3 }}
+ {% endif %}
+ {% if enp0s9.pam4 %}
+ {{ enp0s9.pam4 }}
+ {% endif %} 
+{% endif %}
+{% if enp0s10 %}
+interface enp0s10
+ ip address {{ enp0s10.ip }}/24
+ {% if enp0s10.pam1 %}
+ {{ enp0s10.pam1 }}
+ {% endif %}
+ {% if enp0s10.pam2 %}
+ {{ enp0s10.pam2 }}
+ {% endif %}
+ {% if enp0s10.pam3 %}
+ {{ enp0s10.pam3 }}
+ {% endif %}
+ {% if enp0s10.pam4 %}
+ {{ enp0s10.pam4 }}
+ {% endif %} 
+{% endif %}
+interface lo
+ ip address {{ id }}/32
+ 
+!
+{% if ospf %}
+router ospf
+ ospf router-id {{ id }}
+ {% if redistribute_I %}
+ redistribute {{ redistribute_I }}
+ {% endif %}
+ {% if redistribute_S %}
+ redistribute {{ redistribute_S }}
+ {% endif %}
+ {% if redistribute_R %}
+ redistribute {{ redistribute_R }}
+ {% endif %}
+ {% for networks in ospf %}
+ network {{ networks.network }} area {{ networks.area }}
+ {% endfor %}
+!
+{% endif %}
+{% if isis %}
+router isis {{ isis.id }}
+ net {{ isis.net }}
+ metric-style wide
+ is-type level-2-only
+ {% if redistribute_O %}
+ redistribute {{ redistribute_O }} 
+ {% endif %}
+!
+{% endif %}
+{% if rip %}
+router rip
+ {% if redistribute_O %}
+ redistribute {{ redistribute_O }}
+ {% endif %}
+ {% for networks in rip %}
+ network {{ networks.network }}
+ {% endfor %}
+! 
+{% endif %}
+
+
